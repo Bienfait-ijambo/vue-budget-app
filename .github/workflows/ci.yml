@@ -19,18 +19,15 @@ jobs:
       with:
           node-version: '20'
     - name: npm install
-      run: |
-        npm install
+      run:  npm install
 
     # - name: npm build
     #   run: npm build --if-present
 
     - name: npm test
-      id: tests
-      run: |
-        npm test:unit
-      env:
-        CI: true
+      run:  npm test:unit
+      # env:
+      #   CI: true
 
     # - name: Add heroku remote
     #   if: ${{success()}}
