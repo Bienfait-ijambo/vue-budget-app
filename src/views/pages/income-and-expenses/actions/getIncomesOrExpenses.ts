@@ -34,5 +34,5 @@ export function useGetIncomesOrExpenses() {
     }
   }
 
-  return { getIncomesOrExpenses,serverData,loading }
+  return { getIncomesOrExpenses,serverData ,loading}
 }

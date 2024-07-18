@@ -8,8 +8,8 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'updateRecord', item: IncomeAndExpense): Promise<void>
-  (e: 'deleteRecord', item: IncomeAndExpense): Promise<void>
+  (e: 'updateRecord', item: IncomeAndExpense, dataType:DataType): Promise<void>
+  (e: 'deleteRecord', item: IncomeAndExpense, dataType:DataType): Promise<void>
   (e: 'getIncomesOrExpenses', dataType:DataType): Promise<void>
 
     
@@ -61,10 +61,10 @@ const dataType=ref(DataType.INCOME)
             <td>{{ item.name }}</td>
             <td>{{ item.amount }}</td>
             <td>
-              <button @click="emit('updateRecord',item)" tested-btn="update" class="btn btn-outline-primary">Edit</button>
+              <button @click="emit('updateRecord',item,dataType)" tested-btn="update" class="btn btn-outline-primary">Edit</button>
             </td>
             <td>
-              <button  @click="emit('deleteRecord',item)"  class="btn btn-outline-danger" tested-btn="delete">Delete</button>
+              <button  @click="emit('deleteRecord',item,dataType)"  class="btn btn-outline-danger" tested-btn="delete">Delete</button>
             </td>
           </tr>
         </tbody>

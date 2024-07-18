@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import IncomeAndExpenseTable from '@/views/pages/income-and-expenses/components/IncomeAndExpenseTable.vue'
+import { DataType } from '@/views/pages/income-and-expenses/actions/getIncomesOrExpenses'
 describe('IncomeAndExpenseTable', () => {
   const serverData = {
     id: 1,
@@ -30,8 +31,9 @@ describe('IncomeAndExpenseTable', () => {
     await incomeAndExpenseTable.find('[tested-btn="update"]').trigger('click')
 
     const emitEvent = incomeAndExpenseTable.emitted('updateRecord')
+  
     expect(emitEvent).toHaveLength(1)
-    expect(emitEvent[0]).toEqual([serverData])
+    expect(emitEvent[0]).toEqual([serverData,DataType.INCOME])
   })
 
   it('should emit  deleteRecord', async () => {
@@ -48,7 +50,7 @@ describe('IncomeAndExpenseTable', () => {
 
     const emitEvent = incomeAndExpenseTable.emitted('deleteRecord')
     expect(emitEvent).toHaveLength(1)
-    expect(emitEvent[0]).toEqual([serverData])
+    expect(emitEvent[0]).toEqual([serverData,DataType.INCOME])
   })
 
   it('should emit  getIncomesOrExpenses', async () => {

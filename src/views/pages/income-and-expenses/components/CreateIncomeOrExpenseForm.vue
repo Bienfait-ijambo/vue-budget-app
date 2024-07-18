@@ -1,63 +1,92 @@
 <script lang="ts" setup>
-import {  ref } from 'vue'
-import type { IFormCreateIncomeOrExpense } from '../actions/createIncomeOrExpense';
+import { ref } from 'vue'
+import type { IFormCreateIncomeOrExpense } from '../actions/createIncomeOrExpense'
+import Error from '../../components/Error.vue'
+import BaseInput from '../../components/BaseInput.vue'
+import BaseBtn from '../../components/BaseBtn.vue'
+
+import { useVuelidate } from '@vuelidate/core'
+import { required, decimal } from '@vuelidate/validators'
+import { DataType } from '../actions/getIncomesOrExpenses'
+import { useIncomOrExpenseStore } from '../store/incomeOrExpense'
 
 
-const input = ref<IFormCreateIncomeOrExpense>({ name: '', amount: '', userId: null })
+const rules = {
+  name: { required }, // Matches state.firstName
+  amount: { required, decimal },
+  userId: { required }
+}
+const incomeOrExpense=useIncomOrExpenseStore()
+function changeCheckboxStatus() {
+  incomeOrExpense.checkboxInput.val = !incomeOrExpense.checkboxInput.val
+  incomeOrExpense.checkboxInput.val
+    ? (incomeOrExpense.checkboxInput.label = DataType.INCOME)
+    : (incomeOrExpense.checkboxInput.label = DataType.EXPENSE)
+}
 
-const emit=defineEmits<{
-    (e:'submitForm',input:IFormCreateIncomeOrExpense):Promise<void>
+const v$ = useVuelidate(rules, incomeOrExpense.input)
+
+defineProps<{
+  loading: boolean
 }>()
+const emit = defineEmits<{
+  (e: 'submitForm', input: IFormCreateIncomeOrExpense, expenseOrIncome: DataType): Promise<void>
+}>()
+
+async function validate() {
+  const result = await v$.value.$validate()
+  if (!result) return
+
+  await emit('submitForm', incomeOrExpense.input, incomeOrExpense.checkboxInput.label)
+  v$.value.$reset()
+}
+
 </script>
 <template>
   <div class="container">
-    
     <div class="row">
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">Create an Expense or Income</div>
           <div class="card-body">
             <!-- start card body  -->
-           <form @submit.prevent="emit('submitForm',input)"> 
-            <div class="form-group">
-              <label>Name</label>
-              <input v-model="input.name" tested-input="name"  type="text" class="form-control" placeholder="" />
-            </div>
-            <div class="form-group">
-              <label>Amount</label>
-              <input v-model="input.amount" tested-input="amount" type="text" class="form-control" placeholder="" />
-            </div>
-            <br />
-            <div class="row">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <input style="transform: scale(1.2)" type="radio" value="Income" name="" id="" />
-                  <label>Income</label>
+            <form @submit.prevent="validate">
+              <Error label="Name" :errors="v$.name.$errors">
+                <BaseInput tested-input="name" v-model="incomeOrExpense.input.name" />
+              </Error>
+
+              <Error label="Amount" :errors="v$.amount.$errors">
+                <BaseInput   v-model="incomeOrExpense.input.amount" />
+              </Error>
+              <br />
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>{{ incomeOrExpense.checkboxInput.label }}</label>
+                      <input
+                        type="checkbox"
+                        @click="changeCheckboxStatus"
+                        style="transform: scale(1.3)"
+                        :checked="incomeOrExpense.checkboxInput.val"
+                      />
+                    </div>
+                  </div>
+                </div>
+              <br />
+
+              <div class="row">
+                <slot name="link"></slot>
+              </div>
+              <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                  <!-- <button class="btn btn-primary w-100">Create</button> -->
+                  <BaseBtn :loading="loading" label="Create" />
                 </div>
               </div>
-              
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input style="transform: scale(1.2)" type="radio" value="Expense" name="" id="" />
-                  <label>Expense</label>
-                </div>
-              </div>
-            </div>
-
-            <br />
-
-            <div class="row">
-             <slot name="link"></slot>
-            </div>
-            <div class="row">
-              <div class="col-md-8"></div>
-              <div class="col-md-4">
-                <button class="btn btn-primary w-100">Create</button>
-              </div>
-            </div></form>
-             <!-- end card body -->
+            </form>
+            <!-- end card body -->
           </div>
-         
         </div>
       </div>
     </div>
