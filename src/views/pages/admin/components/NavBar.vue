@@ -1,19 +1,14 @@
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
-import { RouterLink } from "vue-router";
-
-
+import { onMounted, ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 defineProps<{
-  navigation:Array<{name:string,link:string,icon:string}>
+  navigation: Array<{ name: string; link: string; icon: string }>
 }>()
 
-
-const emit=defineEmits<{
-  (e:'logout'):Promise<void>,
+const emit = defineEmits<{
+  (e: 'logout'): Promise<void>
 }>()
-
-
 </script>
 <template>
   <nav
@@ -22,11 +17,8 @@ const emit=defineEmits<{
     class="col-md-3 col-lg-2 d-md-block sidebar collapse"
   >
     <div class="position-sticky pt-3">
-
-      <div align="center">
-        
-      </div>
-      <br/>
+      <div align="center"></div>
+      <br />
       <h6
         class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
       >
@@ -35,23 +27,18 @@ const emit=defineEmits<{
           <span data-feather="plus-circle"></span>
         </a>
       </h6>
-      <ul class="nav flex-column" tested-ul="" >
+      <ul class="nav flex-column" tested-ul="">
         <li class="nav-item" v-for="nav in navigation" :key="nav.name">
-          <slot name="navigation" v-bind="{nav}"></slot>
-         
+          <slot name="navigation" v-bind="{ nav }"></slot>
         </li>
 
-        <li tested-logout="btn"  class="nav-item" style="cursor: pointer" @click="emit('logout')">
-          <a class="nav-link" >
+        <li tested-logout="btn" class="nav-item" style="cursor: pointer" @click="emit('logout')">
+          <a class="nav-link">
             <i class="bi bi-box-arrow-right"></i>
             Logout
           </a>
         </li>
-        
       </ul>
-
-      
-    
     </div>
   </nav>
 </template>

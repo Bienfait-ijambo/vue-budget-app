@@ -5,11 +5,10 @@ type HttpVerbType = 'GET' | 'POST' | 'PUT' | 'DELETE'
 export function httpTimeOut(message: string, timeout = 6000) {
   return new Promise<void>((resolve, reject) => {
     setTimeout(() => {
-      reject(new Error(message));
-    }, timeout);
-  });
+      reject(new Error(message))
+    }, timeout)
+  })
 }
-
 
 export function makeHttpReq<TInput, TResponse>(
   endpoint: string,
@@ -41,5 +40,3 @@ export function makeHttpReq<TInput, TResponse>(
     }
   })
 }
-
-

@@ -4,12 +4,15 @@ import type { IFormCreateIncomeOrExpense } from '../actions/createIncomeOrExpens
 import { DataType } from '../actions/getIncomesOrExpenses'
 
 export const useIncomOrExpenseStore = defineStore('incomeOrExpense', () => {
-    const input = ref<IFormCreateIncomeOrExpense>({ name: '', amount: '', userId: 1 })
+  const input = ref<IFormCreateIncomeOrExpense>({ id:null,name: '', amount: '', userId: 1 })
 
-    const checkboxInput = ref({
-      val: true,
-      label: DataType.INCOME
-    })
+  const checkboxInput = ref({
+    val: true,
+    label: DataType.INCOME
+  })
 
-  return { input,checkboxInput  }
+  const edit=ref(false)
+
+
+  return { input, checkboxInput,edit }
 })

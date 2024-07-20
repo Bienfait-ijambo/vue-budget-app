@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
 import type { IFormCreateIncomeOrExpense } from '../actions/createIncomeOrExpense'
 import Error from '../../components/Error.vue'
 import BaseInput from '../../components/BaseInput.vue'
@@ -10,13 +9,12 @@ import { required, decimal } from '@vuelidate/validators'
 import { DataType } from '../actions/getIncomesOrExpenses'
 import { useIncomOrExpenseStore } from '../store/incomeOrExpense'
 
-
 const rules = {
   name: { required }, // Matches state.firstName
   amount: { required, decimal },
   userId: { required }
 }
-const incomeOrExpense=useIncomOrExpenseStore()
+const incomeOrExpense = useIncomOrExpenseStore()
 function changeCheckboxStatus() {
   incomeOrExpense.checkboxInput.val = !incomeOrExpense.checkboxInput.val
   incomeOrExpense.checkboxInput.val
@@ -40,7 +38,6 @@ async function validate() {
   await emit('submitForm', incomeOrExpense.input, incomeOrExpense.checkboxInput.label)
   v$.value.$reset()
 }
-
 </script>
 <template>
   <div class="container">
@@ -56,22 +53,22 @@ async function validate() {
               </Error>
 
               <Error label="Amount" :errors="v$.amount.$errors">
-                <BaseInput   v-model="incomeOrExpense.input.amount" />
+                <BaseInput tested-input="amount" v-model="incomeOrExpense.input.amount" />
               </Error>
               <br />
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>{{ incomeOrExpense.checkboxInput.label }}</label>
-                      <input
-                        type="checkbox"
-                        @click="changeCheckboxStatus"
-                        style="transform: scale(1.3)"
-                        :checked="incomeOrExpense.checkboxInput.val"
-                      />
-                    </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>{{ incomeOrExpense.checkboxInput.label }}</label>
+                    <input
+                      type="checkbox"
+                      @click="changeCheckboxStatus"
+                      style="transform: scale(1.3)"
+                      :checked="incomeOrExpense.checkboxInput.val"
+                    />
                   </div>
                 </div>
+              </div>
               <br />
 
               <div class="row">
@@ -81,7 +78,9 @@ async function validate() {
                 <div class="col-md-8"></div>
                 <div class="col-md-4">
                   <!-- <button class="btn btn-primary w-100">Create</button> -->
-                  <BaseBtn :loading="loading" label="Create" />
+                  <BaseBtn 
+                  :class="incomeOrExpense.edit ? 'btn btn-warning':'btn btn-primary'"
+                  :loading="loading" :label="incomeOrExpense.edit ? 'Update':'Create'" />
                 </div>
               </div>
             </form>

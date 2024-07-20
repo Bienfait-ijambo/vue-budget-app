@@ -1,51 +1,43 @@
-
 <script setup lang="ts">
-import { onMounted ,ref} from 'vue'
+import { onMounted, ref } from 'vue'
 import NavBar from './components/NavBar.vue'
 import HeaderNav from './components/HeaderNav.vue'
-const navigation = ref( [
-  
+const navigation = ref([
   {
-    name: "Dashboard",
-    link: "/admin",
-    icon: "bi bi-wrench-adjustable",
+    name: 'Dashboard',
+    link: '/admin',
+    icon: 'bi bi-wrench-adjustable'
   },
   {
-    name: "Income & Expenses",
-    link: "/create_income_or_expenses",
-    icon: "bi bi-piggy-bank",
+    name: 'Income & Expenses',
+    link: '/create_income_or_expenses',
+    icon: 'bi bi-piggy-bank'
   },
 
   {
-    name: "Customers",
-    link: "/members",
-    icon: "bi bi-people",
+    name: 'Customers',
+    link: '/members',
+    icon: 'bi bi-people'
   },
   {
-    name: "pricings",
-    link: "/pricings",
-    icon: "bi bi-coin",
-  },
- 
-  
-]);
+    name: 'pricings',
+    link: '/pricings',
+    icon: 'bi bi-coin'
+  }
+])
 
-function logout(){
+function logout() {
   console.log('logou...')
 }
 </script>
 
 <template>
-<HeaderNav/>
+  <HeaderNav />
   <div class="container-fluid">
     <div class="row">
       <NavBar @logout="logout" :navigation="navigation">
-        <template #navigation="{nav}" >
-           <RouterLink
-            class="nav-link"
-            :to="nav.link"
-            exact
-          >
+        <template #navigation="{ nav }">
+          <RouterLink class="nav-link" :to="nav.link" exact>
             <i :class="nav.icon"></i>
             {{ nav.name }}
           </RouterLink>
@@ -57,7 +49,7 @@ function logout(){
         <router-view v-slot="{ Component, route }">
           <transition name="fade" mode="out-in">
             <div :key="route.name">
-                <!-- dynamic components -->
+              <!-- dynamic components -->
               <component :is="Component"></component>
               <!-- end dynamic com -->
             </div>
@@ -207,6 +199,3 @@ body {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
 }
 </style>
-
-
-

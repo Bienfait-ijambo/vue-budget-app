@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import LoginButton from './components/LoginButton.vue';
+import LoginButton from './components/LoginButton.vue'
 
 function loginOrSignUpUser() {
   window.location.href = '/dahsboard'

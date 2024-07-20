@@ -30,8 +30,7 @@ const router = createRouter({
           path: '/income_and_expenses',
           name: 'income_and_expenses',
           component: () => import('../views/pages/income-and-expenses/IncomeAndExpenses.vue')
-        },
-     
+        }
       ]
     }
   ]

@@ -13,26 +13,23 @@ export interface IncomeAndExpense {
   userId: number
 }
 
-export type ResponseType= {data:Array<IncomeAndExpense>}
+export type ResponseType = { data: Array<IncomeAndExpense> }
 
 export function useGetIncomesOrExpenses() {
   const loading = ref(false)
   const serverData = ref<ResponseType>({} as ResponseType)
 
-
   async function getIncomesOrExpenses(dataType: DataType) {
     try {
-        const url=dataType==DataType.INCOME?'incomes':'expenses'
-        loading.value=true
-      const data = await makeHttpReq<undefined,ResponseType>
-      (url, 'GET')
-      serverData.value=data
-      loading.value=false
+      const url = dataType == DataType.INCOME ? 'incomes' : 'expenses'
+      loading.value = true
+      const data = await makeHttpReq<undefined, ResponseType>(url, 'GET')
+      serverData.value = data
+      loading.value = false
     } catch (error) {
-      loading.value=false
-
+      loading.value = false
     }
   }
 
-  return { getIncomesOrExpenses,serverData ,loading}
+  return { getIncomesOrExpenses, serverData, loading }
 }

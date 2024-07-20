@@ -8,6 +8,8 @@ import {
 } from './actions/getIncomesOrExpenses'
 import { useDeleteIncomeOrExpense } from './actions/deleteIncomeOrExpense'
 import { confirmDelation } from '@/helper/sweetAlert'
+import { useRouter } from 'vue-router'
+import { useIncomOrExpenseStore } from './store/incomeOrExpense'
 
 const { serverData, getIncomesOrExpenses, loading } = useGetIncomesOrExpenses()
 const { deleteIncomeOrExpense } = useDeleteIncomeOrExpense()
@@ -19,10 +21,23 @@ async function removeIncomeOrExpense(incomeOrExpense: IncomeAndExpense, dataType
   })
 }
 
+const router=useRouter()
+const incomeOrExpenseStore=useIncomOrExpenseStore()
+
+function passDataToForm(incomeOrExpense: IncomeAndExpense, dataType: DataType){
+
+  if(dataType===DataType.EXPENSE){
+    incomeOrExpenseStore.checkboxInput={val:false,label:DataType.EXPENSE}
+  }
+  incomeOrExpenseStore.input={...incomeOrExpense}
+  incomeOrExpenseStore.edit=true
+  router.push('/create_income_or_expenses')
+}
 
 
 
 onMounted(async () => {
+  incomeOrExpenseStore.edit=false
   await getIncomesOrExpenses(DataType.INCOME)
 })
 </script>
@@ -30,12 +45,13 @@ onMounted(async () => {
 <template>
   <div class="container">
     <div class="row">
-      <h1 @click="i">Incomes and Expenses</h1>
+      <h1 >Incomes and Expenses</h1>
     </div>
-   
+
     <div class="row">
       <div class="col-md-6">
         <IncomeAndExpenseTable
+        @updateRecord="passDataToForm"
           @deleteRecord="removeIncomeOrExpense"
           @getIncomesOrExpenses="getIncomesOrExpenses"
           :serverData="serverData.data"

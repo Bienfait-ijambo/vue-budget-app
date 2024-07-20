@@ -12,7 +12,6 @@ describe('IncomeAndExpenseTable', () => {
   }
 
   it('should takes a prop (array) with id,name,amount,userId', () => {
-    
     const incomeAndExpenseTable = mount(IncomeAndExpenseTable, {
       props: { serverData: [serverData] }
     })
@@ -23,7 +22,6 @@ describe('IncomeAndExpenseTable', () => {
   })
 
   it('should emit  updateRecord', async () => {
- 
     const incomeAndExpenseTable = mount(IncomeAndExpenseTable, {
       props: { serverData: [serverData] }
     })
@@ -31,9 +29,9 @@ describe('IncomeAndExpenseTable', () => {
     await incomeAndExpenseTable.find('[tested-btn="update"]').trigger('click')
 
     const emitEvent = incomeAndExpenseTable.emitted('updateRecord')
-  
+
     expect(emitEvent).toHaveLength(1)
-    expect(emitEvent[0]).toEqual([serverData,DataType.INCOME])
+    expect(emitEvent[0]).toEqual([serverData, DataType.INCOME])
   })
 
   it('should emit  deleteRecord', async () => {
@@ -50,11 +48,10 @@ describe('IncomeAndExpenseTable', () => {
 
     const emitEvent = incomeAndExpenseTable.emitted('deleteRecord')
     expect(emitEvent).toHaveLength(1)
-    expect(emitEvent[0]).toEqual([serverData,DataType.INCOME])
+    expect(emitEvent[0]).toEqual([serverData, DataType.INCOME])
   })
 
   it('should emit  getIncomesOrExpenses', async () => {
-   
     const incomeAndExpenseTable = mount(IncomeAndExpenseTable, {
       props: { serverData: [serverData] }
     })
@@ -66,7 +63,6 @@ describe('IncomeAndExpenseTable', () => {
   })
 
   it('select tag should contain  Incomes and Expenses text', () => {
- 
     const incomeAndExpenseTable = mount(IncomeAndExpenseTable, {
       props: { serverData: [serverData] }
     })
