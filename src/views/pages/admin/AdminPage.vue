@@ -2,10 +2,13 @@
 import { onMounted, ref } from 'vue'
 import NavBar from './components/NavBar.vue'
 import HeaderNav from './components/HeaderNav.vue'
+import { getUserData } from '@/helper/auth'
+import { makeHttpReq } from '@/http/makeHttpReq'
+import { showError, successMsg } from '@/helper/toastnotification'
 const navigation = ref([
   {
     name: 'Dashboard',
-    link: '/admin',
+    link: '/dashboard',
     icon: 'bi bi-wrench-adjustable'
   },
   {
@@ -26,8 +29,20 @@ const navigation = ref([
   }
 ])
 
-function logout() {
-  console.log('logou...')
+const userData = getUserData()
+
+async function logout() {
+  try {
+    const userId = parseInt(userData?.user?.userId as string) as number
+    const data = await makeHttpReq<{ userId: number }, { message: string }>('logout', 'POST', {
+      userId: userId
+    })
+    window.location.href = '/'
+    localStorage.clear()
+    successMsg(data.message)
+  } catch (error) {
+    showError((error as Error).message)
+  }
 }
 </script>
 
@@ -35,7 +50,7 @@ function logout() {
   <HeaderNav />
   <div class="container-fluid">
     <div class="row">
-      <NavBar @logout="logout" :navigation="navigation">
+      <NavBar @logout="logout" :navigation="navigation" :userData="userData">
         <template #navigation="{ nav }">
           <RouterLink class="nav-link" :to="nav.link" exact>
             <i :class="nav.icon"></i>

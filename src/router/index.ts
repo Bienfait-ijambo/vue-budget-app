@@ -8,7 +8,17 @@ const router = createRouter({
       name: 'login',
       component: () => import('../views/pages/auth/AuthPage.vue'),
       children: [
-        { path: '/', name: 'login', component: () => import('../views/pages/auth/LoginPage.vue') }
+        { path: '/', name: 'login', component: () => import('../views/pages/auth/LoginPage.vue') },
+        {
+          path: '/callback',
+          name: 'callback',
+          component: () => import('../views/pages/auth/CallbackPage.vue')
+        },
+        {
+          path: '/token',
+          name: 'token',
+          component: () => import('../views/pages/auth/TokenPage.vue')
+        }
       ]
     },
     {

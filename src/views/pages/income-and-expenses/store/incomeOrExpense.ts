@@ -4,7 +4,7 @@ import type { IFormCreateIncomeOrExpense } from '../actions/createIncomeOrExpens
 import { DataType } from '../actions/getIncomesOrExpenses'
 
 export const useIncomOrExpenseStore = defineStore('incomeOrExpense', () => {
-  const input = ref<IFormCreateIncomeOrExpense>({ id:null,name: '', amount: '', userId: 1 })
+  const input = ref<IFormCreateIncomeOrExpense>({ id:null,name: '', amount: '', userId: null})
 
   const checkboxInput = ref({
     val: true,

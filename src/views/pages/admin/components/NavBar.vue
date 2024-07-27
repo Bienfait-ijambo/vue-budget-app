@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import type { LoginResponseType } from '@/helper/auth';
 
 defineProps<{
   navigation: Array<{ name: string; link: string; icon: string }>
+  userData:LoginResponseType| undefined
 }>()
 
 const emit = defineEmits<{
@@ -17,7 +17,12 @@ const emit = defineEmits<{
     class="col-md-3 col-lg-2 d-md-block sidebar collapse"
   >
     <div class="position-sticky pt-3">
-      <div align="center"></div>
+      <div align="center">
+        <img src="/src/assets/avatar.webp" id="user-avatar" width="50">
+        <a href="#">
+          {{ userData?.user?.email }}
+        </a>
+      </div>
       <br />
       <h6
         class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
@@ -43,6 +48,10 @@ const emit = defineEmits<{
   </nav>
 </template>
 <style>
+#user-avatar{
+  border-radius: 25px;
+  padding:5px;
+}
 a.router-link-active.router-link-exact-active.nav-link {
   color: white;
 }
