@@ -23,7 +23,7 @@ const navigation = ref([
   //   icon: 'bi bi-people'
   // },
   {
-    name: 'pricings',
+    name: 'Pricings',
     link: '/pricings',
     icon: 'bi bi-coin'
   }

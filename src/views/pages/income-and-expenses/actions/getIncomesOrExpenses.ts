@@ -2,8 +2,8 @@ import { makeHttpReq } from '@/http/makeHttpReq'
 import { ref } from 'vue'
 
 export enum DataType {
-  INCOME = 'income',
-  EXPENSE = 'expense'
+  INCOME = 'Income',
+  EXPENSE = 'Expense'
 }
 
 export interface IncomeAndExpense {
