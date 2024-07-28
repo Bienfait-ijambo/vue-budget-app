@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ErrorObject } from '@vuelidate/core'
+import  { type ErrorObject } from '@vuelidate/core'
 
 const props = defineProps<{
   label: string

@@ -28,10 +28,10 @@ describe('IncomeAndExpenseTable', () => {
 
     await incomeAndExpenseTable.find('[tested-btn="update"]').trigger('click')
 
-    const emitEvent = incomeAndExpenseTable.emitted('updateRecord')
+    const emitEvent = incomeAndExpenseTable.emitted('updateRecord') as Array<Array<any>>
 
     expect(emitEvent).toHaveLength(1)
-    expect(emitEvent[0]).toEqual([serverData, DataType.INCOME])
+    expect(emitEvent[0] ).toEqual([serverData, DataType.INCOME])
   })
 
   it('should emit  deleteRecord', async () => {
@@ -46,7 +46,7 @@ describe('IncomeAndExpenseTable', () => {
     })
     await incomeAndExpenseTable.find('[tested-btn="delete"]').trigger('click')
 
-    const emitEvent = incomeAndExpenseTable.emitted('deleteRecord')
+    const emitEvent = incomeAndExpenseTable.emitted('deleteRecord') as Array<Array<any>>
     expect(emitEvent).toHaveLength(1)
     expect(emitEvent[0]).toEqual([serverData, DataType.INCOME])
   })
