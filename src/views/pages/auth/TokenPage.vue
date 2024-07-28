@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { getUserData, setUserData } from '@/helper/auth'
 import { showError } from '@/helper/toastnotification'
-import {  makeHttpReq2 } from '@/http/makeHttpReq'
+import { makeHttpReq2 } from '@/http/makeHttpReq'
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -42,21 +42,18 @@ async function getAccessTokenAndRefreshToken() {
       input
     )
 
-
     setUserData({
-       user:{
-        email:userEmail,
-        userId:userId
-       },
+      user: {
+        email: userEmail,
+        userId: userId
+      },
       token: {
         accessToken: data?.access_token,
         refreshToken: data?.refresh_token
       }
     })
 
-    window.location.href="/dashboard"
-
-    
+    window.location.href = '/dashboard'
   } catch (error) {
     showError((error as Error).message)
   }

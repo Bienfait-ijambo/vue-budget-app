@@ -31,7 +31,7 @@ describe('IncomeAndExpenseTable', () => {
     const emitEvent = incomeAndExpenseTable.emitted('updateRecord') as Array<Array<any>>
 
     expect(emitEvent).toHaveLength(1)
-    expect(emitEvent[0] ).toEqual([serverData, DataType.INCOME])
+    expect(emitEvent[0]).toEqual([serverData, DataType.INCOME])
   })
 
   it('should emit  deleteRecord', async () => {

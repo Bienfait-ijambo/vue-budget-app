@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { LoginResponseType } from '@/helper/auth';
+import type { LoginResponseType } from '@/helper/auth'
 
 defineProps<{
   navigation: Array<{ name: string; link: string; icon: string }>
-  userData:LoginResponseType| undefined
+  userData: LoginResponseType | undefined
 }>()
 
 const emit = defineEmits<{
@@ -18,7 +18,7 @@ const emit = defineEmits<{
   >
     <div class="position-sticky pt-3">
       <div align="center">
-        <img src="/src/assets/avatar.webp" id="user-avatar" width="50">
+        <img src="/src/assets/avatar.webp" id="user-avatar" width="50" />
         <a href="#">
           {{ userData?.user?.email }}
         </a>
@@ -48,9 +48,9 @@ const emit = defineEmits<{
   </nav>
 </template>
 <style>
-#user-avatar{
+#user-avatar {
   border-radius: 25px;
-  padding:5px;
+  padding: 5px;
 }
 a.router-link-active.router-link-exact-active.nav-link {
   color: white;

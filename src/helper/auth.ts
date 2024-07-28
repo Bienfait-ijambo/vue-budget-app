@@ -1,35 +1,31 @@
-export type LoginResponseType={
-    user?:{
-      name?:string
-      email:string
-      userId:string
-    }
-    authorizationCode?:string
-    state?:string
-    codeVerifier?:string
-    token?:{
-    accessToken:string
-    refreshToken:string
-    }
-  
+export type LoginResponseType = {
+  user?: {
+    name?: string
+    email: string
+    userId: string
   }
-
-
-  export function setUserData(data:LoginResponseType){
-    localStorage.setItem('userData', JSON.stringify(data))
+  authorizationCode?: string
+  state?: string
+  codeVerifier?: string
+  token?: {
+    accessToken: string
+    refreshToken: string
   }
+}
 
-  export function getUserData():LoginResponseType|undefined{
+export function setUserData(data: LoginResponseType) {
+  localStorage.setItem('userData', JSON.stringify(data))
+}
+
+export function getUserData(): LoginResponseType | undefined {
   try {
-    const userData:string | null=localStorage.getItem('userData')
+    const userData: string | null = localStorage.getItem('userData')
 
-    if(typeof userData !== 'object'){
-        const loginData:LoginResponseType=JSON.parse(userData)
-        return loginData
+    if (typeof userData !== 'object') {
+      const loginData: LoginResponseType = JSON.parse(userData)
+      return loginData
     }
   } catch (error) {
-
     console.log((error as Error).message)
-    
   }
-  }
+}
