@@ -44,7 +44,9 @@ async function validate() {
     <div class="row">
       <div class="col-md-6">
         <div class="card">
-          <div class="card-header">Create an Expense or Income</div>
+          <div class="card-header">
+            <b>Create an Expense or Income</b>
+          </div>
           <div class="card-body">
             <!-- start card body  -->
             <form @submit.prevent="validate">

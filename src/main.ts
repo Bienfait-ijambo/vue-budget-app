@@ -12,13 +12,16 @@ import 'vue-toast-notification/dist/theme-bootstrap.css'
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 
-
+import VueApexCharts from "vue3-apexcharts";
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
 app.use(ToastPlugin)
 app.use(VueSweetalert2)
+app.use(VueApexCharts)
+
+
 
 
 app.mount('#app')

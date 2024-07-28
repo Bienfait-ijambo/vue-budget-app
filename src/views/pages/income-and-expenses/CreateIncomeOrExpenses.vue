@@ -18,7 +18,7 @@ async function saveIncomeOrExpense(input: IFormCreateIncomeOrExpense, incomeOrEx
 <template>
   <div class="container">
     <div class="row">
-      <h1>Create Incomes or Expenses</h1>
+      <!-- <h3>Create Incomes or Expenses</h3> -->
     </div>
     <div class="row">
       <div class="col-md-10">

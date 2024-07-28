@@ -6,23 +6,33 @@ describe('NavBar', () => {
   //TestCases
   //1. should emit event: logout
   //2. should take an array of menu
+  const propData = {
+    name: 'Dashboard',
+    link: '/admin',
+    icon: 'bi bi-wrench-adjustable'
+  }
 
   it('should emit event: logout', () => {
-    const navBar = mount(NavBar)
+    const navBar = mount(NavBar, {
+      props: {
+        navigation: [propData],
+        userData:{user:{email:"ben@gmail.com",userId:"1",}}
+      },
+      slots: {
+        navigation: `<li>${propData.name}</li>`
+      }
+    })
     navBar.find('[tested-logout="btn"]').trigger('click')
     //array
     const emitEvent = navBar.emitted('logout')
     expect(emitEvent).toHaveLength(1)
   })
   it(' should take an array', () => {
-    const propData = {
-      name: 'Dashboard',
-      link: '/admin',
-      icon: 'bi bi-wrench-adjustable'
-    }
+   
     const navBar = mount(NavBar, {
       props: {
-        navigation: [propData]
+        navigation: [propData],
+        userData:{user:{email:"ben@gmail.com",userId:"1",}}
       },
       slots: {
         navigation: `<li>${propData.name}</li>`

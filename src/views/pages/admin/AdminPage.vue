@@ -17,11 +17,11 @@ const navigation = ref([
     icon: 'bi bi-piggy-bank'
   },
 
-  {
-    name: 'Customers',
-    link: '/members',
-    icon: 'bi bi-people'
-  },
+  // {
+  //   name: 'Customers',
+  //   link: '/members',
+  //   icon: 'bi bi-people'
+  // },
   {
     name: 'pricings',
     link: '/pricings',

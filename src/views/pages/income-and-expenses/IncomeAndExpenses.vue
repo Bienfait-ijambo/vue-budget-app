@@ -21,23 +21,20 @@ async function removeIncomeOrExpense(incomeOrExpense: IncomeAndExpense, dataType
   })
 }
 
-const router=useRouter()
-const incomeOrExpenseStore=useIncomOrExpenseStore()
+const router = useRouter()
+const incomeOrExpenseStore = useIncomOrExpenseStore()
 
-function passDataToForm(incomeOrExpense: IncomeAndExpense, dataType: DataType){
-
-  if(dataType===DataType.EXPENSE){
-    incomeOrExpenseStore.checkboxInput={val:false,label:DataType.EXPENSE}
+function passDataToForm(incomeOrExpense: IncomeAndExpense, dataType: DataType) {
+  if (dataType === DataType.EXPENSE) {
+    incomeOrExpenseStore.checkboxInput = { val: false, label: DataType.EXPENSE }
   }
-  incomeOrExpenseStore.input={...incomeOrExpense}
-  incomeOrExpenseStore.edit=true
+  incomeOrExpenseStore.input = { ...incomeOrExpense }
+  incomeOrExpenseStore.edit = true
   router.push('/create_income_or_expenses')
 }
 
-
-
 onMounted(async () => {
-  incomeOrExpenseStore.edit=false
+  incomeOrExpenseStore.edit = false
   await getIncomesOrExpenses(DataType.INCOME)
 })
 </script>
@@ -45,21 +42,25 @@ onMounted(async () => {
 <template>
   <div class="container">
     <div class="row">
-      <h1 >Incomes and Expenses</h1>
+      <h5>Incomes and Expenses</h5>
     </div>
 
     <div class="row">
       <div class="col-md-6">
-        <IncomeAndExpenseTable
-        @updateRecord="passDataToForm"
-          @deleteRecord="removeIncomeOrExpense"
-          @getIncomesOrExpenses="getIncomesOrExpenses"
-          :serverData="serverData.data"
-        >
-          <template #loading>
-            <span v-if="loading">loading...</span>
-          </template>
-        </IncomeAndExpenseTable>
+        <div class="card">
+          <div class="card-body">
+            <IncomeAndExpenseTable
+              @updateRecord="passDataToForm"
+              @deleteRecord="removeIncomeOrExpense"
+              @getIncomesOrExpenses="getIncomesOrExpenses"
+              :serverData="serverData.data"
+            >
+              <template #loading>
+                <span v-if="loading">loading...</span>
+              </template>
+            </IncomeAndExpenseTable>
+          </div>
+        </div>
       </div>
     </div>
   </div>
