@@ -3,9 +3,6 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import NavBar from '@/views/pages/admin/components/NavBar.vue'
 describe('NavBar', () => {
-  //TestCases
-  //1. should emit event: logout
-  //2. should take an array of menu
   const propData = {
     name: 'Dashboard',
     link: '/admin',
@@ -16,7 +13,7 @@ describe('NavBar', () => {
     const navBar = mount(NavBar, {
       props: {
         navigation: [propData],
-        userData:{user:{email:"ben@gmail.com",userId:"1",}}
+        userData: { user: { email: 'ben@gmail.com', userId: '1' } }
       },
       slots: {
         navigation: `<li>${propData.name}</li>`
@@ -28,11 +25,10 @@ describe('NavBar', () => {
     expect(emitEvent).toHaveLength(1)
   })
   it(' should take an array', () => {
-   
     const navBar = mount(NavBar, {
       props: {
         navigation: [propData],
-        userData:{user:{email:"ben@gmail.com",userId:"1",}}
+        userData: { user: { email: 'ben@gmail.com', userId: '1' } }
       },
       slots: {
         navigation: `<li>${propData.name}</li>`
