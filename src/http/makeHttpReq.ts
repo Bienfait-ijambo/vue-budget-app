@@ -24,7 +24,7 @@ export function makeHttpReq<TInput, TResponse>(
           method: verb,
           headers: {
             'content-type': 'application/json',
-            Authorization: 'Bearer '+userData?.token?.accessToken
+            Authorization: 'Bearer ' + userData?.token?.accessToken
           },
           body: JSON.stringify(input)
         }),
@@ -42,8 +42,6 @@ export function makeHttpReq<TInput, TResponse>(
     }
   })
 }
-
-
 
 export function makeHttpReq2<TInput, TResponse>(
   endpoint: string,

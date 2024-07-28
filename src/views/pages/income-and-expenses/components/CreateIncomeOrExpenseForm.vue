@@ -80,9 +80,11 @@ async function validate() {
                 <div class="col-md-8"></div>
                 <div class="col-md-4">
                   <!-- <button class="btn btn-primary w-100">Create</button> -->
-                  <BaseBtn 
-                  :class="incomeOrExpense.edit ? 'btn btn-warning':'btn btn-primary'"
-                  :loading="loading" :label="incomeOrExpense.edit ? 'Update':'Create'" />
+                  <BaseBtn
+                    :class="incomeOrExpense.edit ? 'btn btn-warning' : 'btn btn-primary'"
+                    :loading="loading"
+                    :label="incomeOrExpense.edit ? 'Update' : 'Create'"
+                  />
                 </div>
               </div>
             </form>
