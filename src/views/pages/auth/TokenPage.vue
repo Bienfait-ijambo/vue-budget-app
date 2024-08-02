@@ -31,7 +31,7 @@ async function getAccessTokenAndRefreshToken() {
   try {
     const input: OauthTokenInputType = {
       grant_type: 'authorization_code',
-      client_id: '9c968b9c-f756-478a-8034-582dbf65fb6e',
+      client_id: '9ca9a351-601f-41da-90d8-d2c86f80dc6c',
       redirect_uri: 'http://localhost:5173/callback',
       code_verifier: codeVerifier,
       code: userData?.authorizationCode as string

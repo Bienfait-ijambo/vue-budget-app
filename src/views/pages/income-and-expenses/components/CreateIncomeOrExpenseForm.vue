@@ -12,7 +12,7 @@ import { useIncomOrExpenseStore } from '../store/incomeOrExpense'
 const rules = {
   name: { required }, // Matches state.firstName
   amount: { required, decimal },
-  userId: { required }
+  // userId: { required }
 }
 const incomeOrExpense = useIncomOrExpenseStore()
 function changeCheckboxStatus() {
@@ -45,7 +45,7 @@ async function validate() {
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
-            <b>Create an Expense or Income</b>
+           <b> Create an Expense or Income</b>
           </div>
           <div class="card-body">
             <!-- start card body  -->
@@ -79,7 +79,6 @@ async function validate() {
               <div class="row">
                 <div class="col-md-8"></div>
                 <div class="col-md-4">
-                  <!-- <button class="btn btn-primary w-100">Create</button> -->
                   <BaseBtn
                     :class="incomeOrExpense.edit ? 'btn btn-warning' : 'btn btn-primary'"
                     :loading="loading"

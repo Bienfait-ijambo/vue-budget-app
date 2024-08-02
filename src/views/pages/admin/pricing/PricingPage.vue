@@ -1,69 +1,28 @@
+
+<script lang="ts" setup>
+import  { onMounted } from 'vue';
+import PricingCard from './components/PricingCard.vue'
+import { useGetPricing } from './actions/getPricing';
+
+const {serverData,getPricings}=useGetPricing()
+
+onMounted(async()=>{
+await getPricings()
+})
+
+</script>
+
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1 class="display-4" align="center">Pricing</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="display-4" align="center">Pricing</h1>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+     <PricingCard :pricingData="serverData?.data"/>
+  
       </div>
     </div>
-    <br />
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card mb-4 box-shadow" align="center">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Basic</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">
-              $15 <small class="text-muted">/ mo</small>
-            </h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>10 users included</li>
-              <li>2 GB of storage</li>
-              <li>Email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">
-              Get Started
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card mb-4 box-shadow" align="center">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Pro</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">
-              $100 <small class="text-muted">/ year</small>
-            </h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>20 users included</li>
-              <li>10 GB of storage</li>
-              <li>Priority email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4" align="center">
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">LifeTime</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$300</h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>30 users included</li>
-              <li>15 GB of storage</li>
-              <li>Phone and email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
+  </template>

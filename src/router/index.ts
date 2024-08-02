@@ -41,11 +41,14 @@ const router = createRouter({
           name: 'income_and_expenses',
           component: () => import('../views/pages/income-and-expenses/IncomeAndExpenses.vue')
         },
+
         {
           path: '/pricings',
           name: 'pricings',
           component: () => import('../views/pages/admin/pricing/PricingPage.vue')
-        }
+        },
+     
+        
       ]
     }
   ]

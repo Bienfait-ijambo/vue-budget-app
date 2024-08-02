@@ -42,14 +42,15 @@ onMounted(async () => {
 <template>
   <div class="container">
     <div class="row">
-      <h5>Incomes and Expenses</h5>
     </div>
 
     <div class="row">
       <div class="col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <IncomeAndExpenseTable
+       
+          <div class="card">
+            <div class="card-header">Incomes and expenses</div>
+            <div class="card-body">
+              <IncomeAndExpenseTable
               @updateRecord="passDataToForm"
               @deleteRecord="removeIncomeOrExpense"
               @getIncomesOrExpenses="getIncomesOrExpenses"
@@ -59,8 +60,9 @@ onMounted(async () => {
                 <span v-if="loading">loading...</span>
               </template>
             </IncomeAndExpenseTable>
+            </div>
           </div>
-        </div>
+          
       </div>
     </div>
   </div>

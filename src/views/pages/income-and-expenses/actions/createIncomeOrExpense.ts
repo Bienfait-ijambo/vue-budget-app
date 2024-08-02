@@ -25,6 +25,7 @@ export function useCreateIncomeOrExpense() {
     edit: boolean
   ) {
     try {
+      console.log('hello....');
       const userData = getUserData()
       const url = dataType == DataType.INCOME ? 'incomes' : 'expenses'
       loading.value = true
