@@ -39,6 +39,8 @@ describe('NavBar', () => {
     expect(navBar.html()).toContain('<li class="nav-item">Income &amp; Expenses</li>')
     expect(navBar.html()).toContain('<li class="nav-item">Customers</li>')
     expect(navBar.html()).toContain('<li class="nav-item">Pricings</li>')
+    expect(navBar.html()).toContain('<li class="nav-item">Payments</li>')
+
 
   })
 })

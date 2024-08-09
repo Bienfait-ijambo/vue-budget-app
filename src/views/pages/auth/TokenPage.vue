@@ -1,15 +1,13 @@
 <script lang="ts" setup>
-import { getUserData, setUserData } from '@/helper/auth'
+import { getUserData, setUserData, UserRole } from '@/helper/auth'
 import { showError } from '@/helper/toastnotification'
-import { makeHttpReq2 } from '@/http/makeHttpReq'
+import { makeHttpReq, makeHttpReq2 } from '@/http/makeHttpReq'
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
 const codeVerifier = route.query?.code_verifier as string
-const userId = route.query?.userId as string
-const userEmail = route.query?.email as string
 
 type OauthTokenInputType = {
   grant_type: 'authorization_code'
@@ -25,6 +23,14 @@ type OauthTokenResponseType = {
   access_token: string
 }
 
+
+type userResponseType = {
+  id: string
+  name: string
+  email: string
+  role: UserRole
+}
+
 async function getAccessTokenAndRefreshToken() {
   const userData = getUserData()
 
@@ -36,20 +42,29 @@ async function getAccessTokenAndRefreshToken() {
       code_verifier: codeVerifier,
       code: userData?.authorizationCode as string
     }
-    const data = await makeHttpReq2<OauthTokenInputType, OauthTokenResponseType>(
+    const [token,{user}] = await Promise.all([
+    makeHttpReq2<OauthTokenInputType, OauthTokenResponseType>(
       'oauth/token',
       'POST',
       input
+    ),
+    makeHttpReq<OauthTokenInputType, {user:userResponseType}>(
+    'user_data',
+      'POST',
+      input
     )
-
+    ])
+  
     setUserData({
       user: {
-        email: userEmail,
-        userId: userId
+        name:user?.name,
+        email: user?.email,
+        userId: user?.id,
+        role:user?.role
       },
       token: {
-        accessToken: data?.access_token,
-        refreshToken: data?.refresh_token
+        accessToken: token?.access_token,
+        refreshToken: token?.refresh_token
       }
     })
 
@@ -59,18 +74,12 @@ async function getAccessTokenAndRefreshToken() {
   }
 }
 
-// $response = Http::asForm()->post('http://passport-app.test/oauth/token', [
-//         'grant_type' => 'authorization_code',
-//         'client_id' => 'client-id',
-//         'redirect_uri' => 'http://third-party-app.com/callback',
-//         'code_verifier' => $codeVerifier,
-//         'code' => $request->code,
-//     ]);
+
 onMounted(async () => {
   await getAccessTokenAndRefreshToken()
 })
 </script>
 
 <template>
-  <h1>callback</h1>
+  <h1>processing... please wait...</h1>
 </template>

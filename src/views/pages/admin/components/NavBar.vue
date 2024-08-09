@@ -22,6 +22,9 @@ const emit = defineEmits<{
         <a href="#">
           {{ userData?.user?.email }}
         </a>
+        <br/>
+        {{ userData?.user?.role }}
+       
       </div>
       <br />
       <h6

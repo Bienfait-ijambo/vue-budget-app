@@ -9,7 +9,7 @@ type HttpVerbType = 'GET' | 'POST' | 'PUT' | 'DELETE'
  * @param timeout 10 seconds is better [you can change]
  * @returns 
  */
-export function httpTimeOut(message: string, timeout = 10000) {
+export function httpTimeOut(message: string, timeout = 6000) {
   return new Promise<void>((resolve, reject) => {
     setTimeout(() => {
       reject(new Error(message))

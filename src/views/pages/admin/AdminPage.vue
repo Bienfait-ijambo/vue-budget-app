@@ -7,10 +7,13 @@ import { makeHttpReq } from '@/http/makeHttpReq'
 import { showError, successMsg } from '@/helper/toastnotification'
 import { Menu } from './components/menu'
 import '/src/assets/dashbaord.css'
+import { useBudgetAppMiddleware } from '@/middleware/budget-app'
 
 const navigation = ref(Menu)
 
 const userData = getUserData()
+
+const {showMenu}=useBudgetAppMiddleware()
 
 async function logout() {
   try {
@@ -31,7 +34,7 @@ async function logout() {
   <HeaderNav />
   <div class="container-fluid">
     <div class="row">
-      <NavBar @logout="logout" :navigation="navigation" :userData="userData">
+      <NavBar @logout="logout" :navigation="showMenu(navigation)" :userData="userData">
         <template #navigation="{ nav }">
           <RouterLink class="nav-link" :to="nav.link" exact>
             <i :class="nav.icon"></i>

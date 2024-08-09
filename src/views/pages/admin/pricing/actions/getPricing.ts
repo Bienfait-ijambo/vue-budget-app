@@ -1,3 +1,4 @@
+import { showError } from "@/helper/toastnotification"
 import { makeHttpReq } from "@/http/makeHttpReq"
 import { ref } from "vue"
 
@@ -12,6 +13,7 @@ export interface IPricingFeatures{
     stripe_price_id: string,
     stripe_prod_id: string,
     price: string,
+    payment_term:string
     pricing_features:Array<IPricingFeatures>
   
   }
@@ -30,7 +32,7 @@ export interface IPricingFeatures{
         serverData.value = data
         loading.value = false
       } catch (error) {
-        console.error(error)
+        showError((error as Error).message)
         loading.value = false
       }
     }

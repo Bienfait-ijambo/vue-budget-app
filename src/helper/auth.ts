@@ -3,6 +3,7 @@ export type LoginResponseType = {
     name?: string
     email: string
     userId: string
+    role:string
   }
   authorizationCode?: string
   state?: string
@@ -11,6 +12,11 @@ export type LoginResponseType = {
     accessToken: string
     refreshToken: string
   }
+}
+
+export enum UserRole{
+  ADMIN='ADMIN',
+  CUSTOMER='CUSTOMER'
 }
 
 export function setUserData(data: LoginResponseType) {

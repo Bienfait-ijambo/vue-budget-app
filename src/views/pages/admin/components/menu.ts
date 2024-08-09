@@ -1,4 +1,10 @@
-export const Menu=[
+
+export interface IMenu{
+  name:string
+  link:string
+  icon:string
+}
+export const Menu:Array<IMenu>=[
     {
       name: 'Dashboard',
       link: '/dashboard',
@@ -12,12 +18,17 @@ export const Menu=[
   
     {
       name: 'Customers',
-      link: '/members',
+      link: '/customers',
       icon: 'bi bi-people'
     },
     {
       name: 'Pricings',
       link: '/pricings',
       icon: 'bi bi-coin'
+    },
+    {
+      name: 'Payments',
+      link: '/payments',
+      icon: 'bi bi-cash'
     }
   ]
