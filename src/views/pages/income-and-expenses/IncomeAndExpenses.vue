@@ -10,6 +10,7 @@ import { useDeleteIncomeOrExpense } from './actions/deleteIncomeOrExpense'
 import { confirmDelation } from '@/helper/sweetAlert'
 import { useRouter } from 'vue-router'
 import { useIncomOrExpenseStore } from './store/incomeOrExpense'
+import { getUserData } from '@/helper/auth'
 
 const { serverData, getIncomesOrExpenses, loading } = useGetIncomesOrExpenses()
 const { deleteIncomeOrExpense } = useDeleteIncomeOrExpense()
@@ -33,6 +34,8 @@ function passDataToForm(incomeOrExpense: IncomeAndExpense, dataType: DataType) {
   router.push('/create_income_or_expenses')
 }
 
+
+
 onMounted(async () => {
   incomeOrExpenseStore.edit = false
   await getIncomesOrExpenses(DataType.INCOME)
@@ -41,16 +44,14 @@ onMounted(async () => {
 
 <template>
   <div class="container">
-    <div class="row">
-    </div>
+    <div class="row"></div>
 
     <div class="row">
       <div class="col-md-6">
-       
-          <div class="card">
-            <div class="card-header">Incomes and expenses</div>
-            <div class="card-body">
-              <IncomeAndExpenseTable
+        <div class="card">
+          <div class="card-header">Incomes and expenses</div>
+          <div class="card-body">
+            <IncomeAndExpenseTable
               @updateRecord="passDataToForm"
               @deleteRecord="removeIncomeOrExpense"
               @getIncomesOrExpenses="getIncomesOrExpenses"
@@ -60,9 +61,8 @@ onMounted(async () => {
                 <span v-if="loading">loading...</span>
               </template>
             </IncomeAndExpenseTable>
-            </div>
           </div>
-          
+        </div>
       </div>
     </div>
   </div>

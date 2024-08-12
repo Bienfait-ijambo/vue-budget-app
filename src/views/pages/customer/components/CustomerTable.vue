@@ -5,6 +5,10 @@ import type { ICheckUserAccount } from '../actions/getCustomer';
 defineProps<{
     checkUserAccountData:Array<ICheckUserAccount>
 }>()
+
+const emit=defineEmits<{
+    (e:'blockOrUnblockUser',data:ICheckUserAccount):Promise<void>
+}>()
 </script>
 
 
@@ -41,9 +45,14 @@ defineProps<{
             <td>{{user.start_date}}</td>
             <td>{{user.end_date}}</td>
             <td>{{user.leftDays}}</td>
-            <td>{{user.account_status}}</td>
+            <td>
+               {{user.account_status}}
+            </td>
                 <td>
-                    <button class="btn btn-warning btn-sm">block user</button>
+                    <button @click="emit('blockOrUnblockUser',user)" class="btn btn-warning btn-sm">
+                       {{ user.account_status==='Active'?'Block':'Unblock' }}
+
+                    </button>
                 </td>
           </tr>
           </tbody>

@@ -1,10 +1,23 @@
 <script lang="ts" setup>
+import { onMounted } from 'vue';
 import LoginButton from './components/LoginButton.vue'
 import { APP } from '@/http/App'
 
 function loginOrSignUpUser() {
   window.location.href = APP.baseURL + '/auth/redirect'
 }
+
+
+
+onMounted(()=>{
+
+  setTimeout(()=>{
+        window.Echo.channel("countProject")
+  .listen("NewProjectCreated",(e) => {
+        console.log(e)
+   });
+       },200)
+})
 </script>
 <template>
   <div class="row">
@@ -20,7 +33,7 @@ function loginOrSignUpUser() {
         <div class="card">
           <div class="card-body">
             <br />
-
+         
             <LoginButton @loginOrSignUpUser="loginOrSignUpUser">
               <template #image>
                 <img src="/src/assets/google.svg" height="20" width="20" />

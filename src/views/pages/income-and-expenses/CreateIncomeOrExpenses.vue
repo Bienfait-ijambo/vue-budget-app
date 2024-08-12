@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { getUserData } from '@/helper/auth';
 import {
   useCreateIncomeOrExpense,
   type IFormCreateIncomeOrExpense
@@ -13,6 +14,9 @@ const { edit } = useIncomOrExpenseStore()
 async function saveIncomeOrExpense(input: IFormCreateIncomeOrExpense, incomeOrExpense: DataType) {
   await createIncomeOrExpense(incomeOrExpense, input, edit)
 }
+
+const userData=getUserData()
+
 </script>
 
 <template>
@@ -21,7 +25,9 @@ async function saveIncomeOrExpense(input: IFormCreateIncomeOrExpense, incomeOrEx
     </div>
     <div class="row">
       <div class="col-md-10">
-        <CreateIncomeOrExpenseForm :loading="loading" 
+        <CreateIncomeOrExpenseForm
+        :userAccountStatus="userData?.userAccount?.account_status"
+        :loading="loading" 
         @submit-form="saveIncomeOrExpense">
           <template #link>
             <RouterLink to="/income_and_expenses">Income & Expenses</RouterLink>

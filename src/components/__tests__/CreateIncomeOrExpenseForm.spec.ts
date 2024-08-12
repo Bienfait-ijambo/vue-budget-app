@@ -11,6 +11,7 @@ describe('CreateIncomeOrExpenseForm', () => {
       userId: 1
     }
 
+
     const form = mount(CreateIncomeOrExpenseForm, {
       props: { loading: false },
       global: {

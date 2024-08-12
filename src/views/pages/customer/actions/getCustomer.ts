@@ -13,7 +13,8 @@ export interface ICheckUserAccount {
   start_date:  string
   end_date:  string
   leftDays: number
-  account_status:  string
+  user_id:number
+  account_status: 'Active' |'Inactive'
 }
 
 type ResponseType = { data: Array<ICheckUserAccount> }

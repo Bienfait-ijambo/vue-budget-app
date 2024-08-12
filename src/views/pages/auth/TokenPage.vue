@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { getUserData, setUserData, UserRole } from '@/helper/auth'
+import { getUserData, setUserData, UserRole, type userAccountStatusType } from '@/helper/auth'
 import { showError } from '@/helper/toastnotification'
 import { makeHttpReq, makeHttpReq2 } from '@/http/makeHttpReq'
 import { onMounted } from 'vue'
@@ -31,6 +31,8 @@ type userResponseType = {
   role: UserRole
 }
 
+
+
 async function getAccessTokenAndRefreshToken() {
   const userData = getUserData()
 
@@ -42,13 +44,16 @@ async function getAccessTokenAndRefreshToken() {
       code_verifier: codeVerifier,
       code: userData?.authorizationCode as string
     }
-    const [token,{user}] = await Promise.all([
+    const [token,{user,userAccount}] = await Promise.all([
     makeHttpReq2<OauthTokenInputType, OauthTokenResponseType>(
       'oauth/token',
       'POST',
       input
     ),
-    makeHttpReq<OauthTokenInputType, {user:userResponseType}>(
+    makeHttpReq<OauthTokenInputType, {user:userResponseType,userAccount:{
+      leftDays:string,
+      account_status:userAccountStatusType
+    }}>(
     'user_data',
       'POST',
       input
@@ -62,6 +67,12 @@ async function getAccessTokenAndRefreshToken() {
         userId: user?.id,
         role:user?.role
       },
+
+      userAccount:{
+        leftDays:userAccount?.leftDays,
+        account_status:userAccount?.account_status
+      },
+   
       token: {
         accessToken: token?.access_token,
         refreshToken: token?.refresh_token

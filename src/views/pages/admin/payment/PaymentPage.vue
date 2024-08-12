@@ -12,7 +12,7 @@ await getPayments()
 
 <template>
     <div class="container">
-      <h1>My payments</h1>
+      <h4>My payments</h4>
       <div class="row">
         <div class="col-md-12">
             <paymentTable :payments="serverData?.data"/>

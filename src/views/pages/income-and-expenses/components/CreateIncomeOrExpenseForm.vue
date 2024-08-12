@@ -8,7 +8,12 @@ import { useVuelidate } from '@vuelidate/core'
 import { required, decimal } from '@vuelidate/validators'
 import { DataType } from '../actions/getIncomesOrExpenses'
 import { useIncomOrExpenseStore } from '../store/incomeOrExpense'
+import type { userAccountStatusType } from '@/helper/auth'
 
+defineProps<{
+  loading: boolean
+  userAccountStatus:userAccountStatusType
+}>()
 const rules = {
   name: { required }, // Matches state.firstName
   amount: { required, decimal },
@@ -24,9 +29,7 @@ function changeCheckboxStatus() {
 
 const v$ = useVuelidate(rules, incomeOrExpense.input)
 
-defineProps<{
-  loading: boolean
-}>()
+
 const emit = defineEmits<{
   (e: 'submitForm', input: IFormCreateIncomeOrExpense, expenseOrIncome: DataType): Promise<void>
 }>()
@@ -79,11 +82,18 @@ async function validate() {
               <div class="row">
                 <div class="col-md-8"></div>
                 <div class="col-md-4">
+                 <div v-if="userAccountStatus==='Active'">
                   <BaseBtn
                     :class="incomeOrExpense.edit ? 'btn btn-warning' : 'btn btn-primary'"
                     :loading="loading"
                     :label="incomeOrExpense.edit ? 'Update' : 'Create'"
                   />
+                 </div>
+                 <div v-else>
+                  Please make a subscription : <RouterLink to="/pricings">Pricings</RouterLink>
+                 </div>
+                   
+                 
                 </div>
               </div>
             </form>

@@ -1,4 +1,9 @@
+
+
+export type userAccountStatusType='Active'|'Inactive'
+
 export type LoginResponseType = {
+
   user?: {
     name?: string
     email: string
@@ -12,6 +17,10 @@ export type LoginResponseType = {
     accessToken: string
     refreshToken: string
   }
+ userAccount:{
+  leftDays:string
+  account_status:userAccountStatusType
+ }
 }
 
 export enum UserRole{

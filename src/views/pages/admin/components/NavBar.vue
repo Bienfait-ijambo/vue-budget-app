@@ -24,7 +24,8 @@ const emit = defineEmits<{
         </a>
         <br/>
         {{ userData?.user?.role }}
-       
+        <br/>
+        LeftDays : {{ userData?.userAccount?.leftDays }} - <span class="badge bg-success"> {{ userData?.userAccount?.account_status }}</span>
       </div>
       <br />
       <h6
