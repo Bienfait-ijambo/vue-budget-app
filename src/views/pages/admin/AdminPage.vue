@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {  ref } from 'vue'
+import {  onMounted, ref } from 'vue'
 import NavBar from './components/NavBar.vue'
 import HeaderNav from './components/HeaderNav.vue'
 import { getUserData } from '@/helper/auth'
@@ -28,6 +28,24 @@ async function logout() {
     showError((error as Error).message)
   }
 }
+
+async function tryLogoutUser(){
+
+  try {
+    await makeHttpReq<{ userId: undefined }, { message: string }>('logout', 'POST', {
+      userId: undefined
+    })
+  } catch (error) {
+    showError((error as Error).message)
+    
+  }
+}
+
+onMounted(async()=>{
+
+  await tryLogoutUser()
+
+})
 </script>
 
 <template>

@@ -21,7 +21,13 @@ const router = createRouter({
           path: '/token',
           name: 'token',
           component: () => import('../views/pages/auth/TokenPage.vue')
-        }
+        },
+        {
+          path: '/user_blocked',
+          name: 'user_blocked',
+          component: () => import('../views/pages/auth/UserBlockedPage.vue')
+        },
+       
       ]
     },
     {
@@ -75,6 +81,9 @@ const router = createRouter({
      
          
         },
+
+
+     
        
         
       ]

@@ -59,8 +59,9 @@ async function getAccessTokenAndRefreshToken() {
       input
     )
     ])
-  
-    setUserData({
+
+    if(userAccount?.account_status==='Active'){
+      setUserData({
       user: {
         name:user?.name,
         email: user?.email,
@@ -80,6 +81,14 @@ async function getAccessTokenAndRefreshToken() {
     })
 
     window.location.href = '/dashboard'
+    }else{
+      window.location.href = '/user_blocked'
+    }
+      
+   
+ 
+
+    
   } catch (error) {
     showError((error as Error).message)
   }
