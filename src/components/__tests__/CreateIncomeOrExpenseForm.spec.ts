@@ -12,7 +12,7 @@ describe('CreateIncomeOrExpenseForm', () => {
     }
 
     const form = mount(CreateIncomeOrExpenseForm, {
-      props: { loading: false },
+      props: { loading: false, userAccountStatus: 'active' },
       global: {
         plugins: [createPinia()]
       }

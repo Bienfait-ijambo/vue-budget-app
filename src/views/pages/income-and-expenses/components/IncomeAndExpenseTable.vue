@@ -30,8 +30,8 @@ const dataType = ref(DataType.INCOME)
             name=""
             id=""
           >
-            <option tested-option="income" value="income">Incomes</option>
-            <option tested-option="expense" value="expense">Expenses</option>
+            <option tested-option="income" :value="DataType.INCOME" selected="true">Incomes</option>
+            <option tested-option="expense" :value="DataType.EXPENSE">Expenses</option>
           </select>
           <br />
         </div>

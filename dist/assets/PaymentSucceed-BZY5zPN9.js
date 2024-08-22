@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{o as c,c as t,e as o}from"./index-B8mJllWN.js";const s={},n={class:"container"},a=o("h1",null,"Payment succeed",-1),r=[a];function _(d,i){return c(),t("div",n,r)}const l=e(s,[["render",_]]);export{l as default};

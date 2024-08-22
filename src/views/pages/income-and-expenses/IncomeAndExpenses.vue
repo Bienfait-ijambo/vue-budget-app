@@ -10,6 +10,7 @@ import { useDeleteIncomeOrExpense } from './actions/deleteIncomeOrExpense'
 import { confirmDelation } from '@/helper/sweetAlert'
 import { useRouter } from 'vue-router'
 import { useIncomOrExpenseStore } from './store/incomeOrExpense'
+import { getUserData } from '@/helper/auth'
 
 const { serverData, getIncomesOrExpenses, loading } = useGetIncomesOrExpenses()
 const { deleteIncomeOrExpense } = useDeleteIncomeOrExpense()
@@ -41,13 +42,12 @@ onMounted(async () => {
 
 <template>
   <div class="container">
-    <div class="row">
-      <h5>Incomes and Expenses</h5>
-    </div>
+    <div class="row"></div>
 
     <div class="row">
       <div class="col-md-6">
         <div class="card">
+          <div class="card-header">Incomes and expenses</div>
           <div class="card-body">
             <IncomeAndExpenseTable
               @updateRecord="passDataToForm"

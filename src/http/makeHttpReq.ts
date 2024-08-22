@@ -3,6 +3,12 @@ import { APP } from './App'
 
 type HttpVerbType = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
+/**
+ *
+ * @param message
+ * @param timeout 10 seconds is better [you can change]
+ * @returns
+ */
 export function httpTimeOut(message: string, timeout = 6000) {
   return new Promise<void>((resolve, reject) => {
     setTimeout(() => {

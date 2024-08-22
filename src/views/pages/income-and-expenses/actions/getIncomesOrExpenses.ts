@@ -2,8 +2,8 @@ import { makeHttpReq } from '@/http/makeHttpReq'
 import { ref } from 'vue'
 
 export enum DataType {
-  INCOME = 'Income',
-  EXPENSE = 'Expense'
+  INCOME = 'incomes',
+  EXPENSE = 'expenses'
 }
 
 export interface IncomeAndExpense {
@@ -21,12 +21,13 @@ export function useGetIncomesOrExpenses() {
 
   async function getIncomesOrExpenses(dataType: DataType) {
     try {
-      const url = dataType == DataType.INCOME ? 'incomes' : 'expenses'
+      const url = dataType == DataType.INCOME ? DataType.INCOME : DataType.EXPENSE
       loading.value = true
       const data = await makeHttpReq<undefined, ResponseType>(url, 'GET')
       serverData.value = data
       loading.value = false
     } catch (error) {
+      console.error(error)
       loading.value = false
     }
   }

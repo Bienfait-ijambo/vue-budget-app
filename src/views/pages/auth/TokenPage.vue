@@ -1,15 +1,14 @@
 <script lang="ts" setup>
-import { getUserData, setUserData } from '@/helper/auth'
+import { getUserData, setUserData, UserRole, type userAccountStatusType } from '@/helper/auth'
 import { showError } from '@/helper/toastnotification'
-import { makeHttpReq2 } from '@/http/makeHttpReq'
+import { APP } from '@/http/App'
+import { makeHttpReq, makeHttpReq2 } from '@/http/makeHttpReq'
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
 const codeVerifier = route.query?.code_verifier as string
-const userId = route.query?.userId as string
-const userEmail = route.query?.email as string
 
 type OauthTokenInputType = {
   grant_type: 'authorization_code'
@@ -25,52 +24,77 @@ type OauthTokenResponseType = {
   access_token: string
 }
 
+type userResponseType = {
+  id: string
+  name: string
+  email: string
+  role: UserRole
+}
+
 async function getAccessTokenAndRefreshToken() {
   const userData = getUserData()
 
   try {
     const input: OauthTokenInputType = {
       grant_type: 'authorization_code',
-      client_id: '9c968b9c-f756-478a-8034-582dbf65fb6e',
+      client_id: '9ca9a351-601f-41da-90d8-d2c86f80dc6c',
       redirect_uri: 'http://localhost:5173/callback',
       code_verifier: codeVerifier,
       code: userData?.authorizationCode as string
     }
-    const data = await makeHttpReq2<OauthTokenInputType, OauthTokenResponseType>(
-      'oauth/token',
-      'POST',
-      input
-    )
+    const [token, { user, userAccount }] = await Promise.all([
+      makeHttpReq2<OauthTokenInputType, OauthTokenResponseType>('oauth/token', 'POST', input),
+      makeHttpReq<
+        OauthTokenInputType,
+        {
+          user: userResponseType
+          userAccount: {
+            leftDays: string
+            account_status: userAccountStatusType
+          }
+        }
+      >('user_data', 'POST', input)
+    ])
 
-    setUserData({
-      user: {
-        email: userEmail,
-        userId: userId
-      },
-      token: {
-        accessToken: data?.access_token,
-        refreshToken: data?.refresh_token
-      }
-    })
+    if (userAccount?.account_status === 'Active') {
+      setUserData({
+        user: {
+          name: user?.name,
+          email: user?.email,
+          userId: user?.id,
+          role: user?.role
+        },
 
-    window.location.href = '/dashboard'
+        userAccount: {
+          leftDays: userAccount?.leftDays,
+          account_status: userAccount?.account_status
+        },
+
+        token: {
+          accessToken: token?.access_token,
+          refreshToken: token?.refresh_token
+        }
+      })
+
+      window.location.href = '/dashboard'
+    } else {
+      window.location.href = '/user_blocked'
+    }
   } catch (error) {
-    showError((error as Error).message)
+    if ((error as Error).message === 'Unexpected end of JSON input') {
+      showError('Failed Login ..., please try again...')
+      setTimeout(() => (window.location.href = APP.baseURL + '/auth/redirect'), 1500)
+    } else {
+      showError((error as Error).message)
+    }
   }
 }
 
-// $response = Http::asForm()->post('http://passport-app.test/oauth/token', [
-//         'grant_type' => 'authorization_code',
-//         'client_id' => 'client-id',
-//         'redirect_uri' => 'http://third-party-app.com/callback',
-//         'code_verifier' => $codeVerifier,
-//         'code' => $request->code,
-//     ]);
 onMounted(async () => {
   await getAccessTokenAndRefreshToken()
 })
 </script>
 
 <template>
-  <h1>callback</h1>
+  <h1>processing... please wait...</h1>
 </template>

@@ -1,16 +1,10 @@
-name: CI
+name: CI_test
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
-  build:
+  test_and_build:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,4 +26,4 @@ jobs:
       run: rm -rf dist
     
     - name: Build app
-      run: npm run build
+      run: npm run build-only

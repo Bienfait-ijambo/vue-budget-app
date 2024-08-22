@@ -1,8 +1,11 @@
+export type userAccountStatusType = 'Active' | 'Inactive'
+
 export type LoginResponseType = {
   user?: {
     name?: string
     email: string
     userId: string
+    role: string
   }
   authorizationCode?: string
   state?: string
@@ -11,6 +14,15 @@ export type LoginResponseType = {
     accessToken: string
     refreshToken: string
   }
+  userAccount?: {
+    leftDays: string
+    account_status: userAccountStatusType
+  }
+}
+
+export enum UserRole {
+  ADMIN = 'ADMIN',
+  CUSTOMER = 'CUSTOMER'
 }
 
 export function setUserData(data: LoginResponseType) {
