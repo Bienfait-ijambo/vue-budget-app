@@ -1,10 +1,10 @@
-name: CI
+name: CI_test
 
 on:
   workflow_call:
 
 jobs:
-  build:
+  test_and_build:
     runs-on: ubuntu-latest
 
     steps:
