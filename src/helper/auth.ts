@@ -17,7 +17,7 @@ export type LoginResponseType = {
     accessToken: string
     refreshToken: string
   }
- userAccount:{
+ userAccount?:{
   leftDays:string
   account_status:userAccountStatusType
  }

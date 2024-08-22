@@ -1,3 +1,10 @@
+<script lang="ts" setup>
+
+import { onMounted } from 'vue'
+onMounted(()=>{
+    localStorage.clear();
+})
+</script>
 <template>
      <br>
     <br>

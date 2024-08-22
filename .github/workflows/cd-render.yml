@@ -1,0 +1,19 @@
+name: Trigger Deployment
+
+
+name: CI
+
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # - name: Trigger Deployment via GET Request
+      #   run: |
+      #     curl -X GET https://laravel.com/docs/11.x/starter-kits

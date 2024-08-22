@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { getUserData, setUserData, UserRole, type userAccountStatusType } from '@/helper/auth'
 import { showError } from '@/helper/toastnotification'
+import { APP } from '@/http/App'
 import { makeHttpReq, makeHttpReq2 } from '@/http/makeHttpReq'
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
@@ -23,15 +24,12 @@ type OauthTokenResponseType = {
   access_token: string
 }
 
-
 type userResponseType = {
   id: string
   name: string
   email: string
   role: UserRole
 }
-
-
 
 async function getAccessTokenAndRefreshToken() {
   const userData = getUserData()
@@ -44,56 +42,53 @@ async function getAccessTokenAndRefreshToken() {
       code_verifier: codeVerifier,
       code: userData?.authorizationCode as string
     }
-    const [token,{user,userAccount}] = await Promise.all([
-    makeHttpReq2<OauthTokenInputType, OauthTokenResponseType>(
-      'oauth/token',
-      'POST',
-      input
-    ),
-    makeHttpReq<OauthTokenInputType, {user:userResponseType,userAccount:{
-      leftDays:string,
-      account_status:userAccountStatusType
-    }}>(
-    'user_data',
-      'POST',
-      input
-    )
+    const [token, { user, userAccount }] = await Promise.all([
+      makeHttpReq2<OauthTokenInputType, OauthTokenResponseType>('oauth/token', 'POST', input),
+      makeHttpReq<
+        OauthTokenInputType,
+        {
+          user: userResponseType
+          userAccount: {
+            leftDays: string
+            account_status: userAccountStatusType
+          }
+        }
+      >('user_data', 'POST', input)
     ])
 
-    if(userAccount?.account_status==='Active'){
+    if (userAccount?.account_status === 'Active') {
       setUserData({
-      user: {
-        name:user?.name,
-        email: user?.email,
-        userId: user?.id,
-        role:user?.role
-      },
+        user: {
+          name: user?.name,
+          email: user?.email,
+          userId: user?.id,
+          role: user?.role
+        },
 
-      userAccount:{
-        leftDays:userAccount?.leftDays,
-        account_status:userAccount?.account_status
-      },
-   
-      token: {
-        accessToken: token?.access_token,
-        refreshToken: token?.refresh_token
-      }
-    })
+        userAccount: {
+          leftDays: userAccount?.leftDays,
+          account_status: userAccount?.account_status
+        },
 
-    window.location.href = '/dashboard'
-    }else{
+        token: {
+          accessToken: token?.access_token,
+          refreshToken: token?.refresh_token
+        }
+      })
+
+      window.location.href = '/dashboard'
+    } else {
       window.location.href = '/user_blocked'
     }
-      
-   
- 
-
-    
   } catch (error) {
-    showError((error as Error).message)
+    if ((error as Error).message === 'Unexpected end of JSON input') {
+      showError('Failed Login ..., please try again...')
+      setTimeout(() => (window.location.href = APP.baseURL + '/auth/redirect'), 1500)
+    } else {
+      showError((error as Error).message)
+    }
   }
 }
-
 
 onMounted(async () => {
   await getAccessTokenAndRefreshToken()

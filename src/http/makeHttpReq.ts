@@ -36,7 +36,7 @@ export function makeHttpReq<TInput, TResponse>(
         }),
         httpTimeOut('Server Error')
       ])
-
+ 
       const data: TResponse = await (res as Response).json()
 
       if (!(res as Response).ok) {
