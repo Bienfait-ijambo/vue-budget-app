@@ -8,7 +8,7 @@ jobs:
     uses : ./.github/workflows/ci-test.yml
 
   deploy:
-    name : run test
+    name : deploy to render host
     needs: tests
     uses : ./.github/workflows/cd-render.yml
   
