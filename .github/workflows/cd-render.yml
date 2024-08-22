@@ -1,8 +1,5 @@
 name: Trigger Deployment
 
-
-name: CI
-
 on:
   workflow_call:
 
