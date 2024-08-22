@@ -23,7 +23,7 @@ function loginOrSignUpUser() {
 
             <LoginButton @loginOrSignUpUser="loginOrSignUpUser">
               <template #image>
-                <img src="/src/assets/google.svg" height="20" width="20" />
+                <!-- <img src="/src/assets/google.svg" height="20" width="20" /> -->
               </template>
             </LoginButton>
 

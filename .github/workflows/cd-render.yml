@@ -11,7 +11,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-        
-      # - name: Trigger Deployment via GET Request
-      #   run: |
-      #     curl -X GET https://laravel.com/docs/11.x/starter-kits
+      - name: Trigger Deployment via GET Request
+        run: |
+          curl -X GET https://api.render.com/deploy/srv-cr3qe18gph6c73fgfiq0?key=xwYIhMDE-Bw
