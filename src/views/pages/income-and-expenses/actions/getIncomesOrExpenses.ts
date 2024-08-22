@@ -21,7 +21,7 @@ export function useGetIncomesOrExpenses() {
 
   async function getIncomesOrExpenses(dataType: DataType) {
     try {
-      const url = dataType == DataType.INCOME ?  DataType.INCOME  : DataType.EXPENSE 
+      const url = dataType == DataType.INCOME ? DataType.INCOME : DataType.EXPENSE
       loading.value = true
       const data = await makeHttpReq<undefined, ResponseType>(url, 'GET')
       serverData.value = data

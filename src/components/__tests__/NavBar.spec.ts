@@ -16,16 +16,15 @@ describe('NavBar', () => {
     expect(emitEvent).toHaveLength(1)
   })
   it(' should take an array', () => {
-    
-    const userData={
-      email:"admin@gmail.com",
-      name:"",
-      userId:"1"
+    const userData = {
+      email: 'admin@gmail.com',
+      name: '',
+      userId: '1'
     }
     const navBar = mount(NavBar, {
       props: {
         navigation: Menu,
-        userData:{user:userData}
+        userData: { user: userData }
       },
       slots: {
         navigation: `<template #navigation="{ nav }">
@@ -33,14 +32,12 @@ describe('NavBar', () => {
         </template>`
       }
     })
-    
+
     // expec
     expect(navBar.html()).toContain('<li class="nav-item">Dashboard</li>')
     expect(navBar.html()).toContain('<li class="nav-item">Income &amp; Expenses</li>')
     expect(navBar.html()).toContain('<li class="nav-item">Customers</li>')
     expect(navBar.html()).toContain('<li class="nav-item">Pricings</li>')
     expect(navBar.html()).toContain('<li class="nav-item">Payments</li>')
-
-
   })
 })

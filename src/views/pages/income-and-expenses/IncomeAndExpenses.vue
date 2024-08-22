@@ -34,8 +34,6 @@ function passDataToForm(incomeOrExpense: IncomeAndExpense, dataType: DataType) {
   router.push('/create_income_or_expenses')
 }
 
-
-
 onMounted(async () => {
   incomeOrExpenseStore.edit = false
   await getIncomesOrExpenses(DataType.INCOME)

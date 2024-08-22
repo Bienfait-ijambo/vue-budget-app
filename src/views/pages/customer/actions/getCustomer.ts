@@ -2,19 +2,18 @@ import { showError } from '@/helper/toastnotification'
 import { makeHttpReq } from '@/http/makeHttpReq'
 import { ref } from 'vue'
 
-
 export interface ICheckUserAccount {
-  id: number;
+  id: number
   name: string
-  email:  string
-  pricing:  string
-  amount:  string
-  payment_term:  string
-  start_date:  string
-  end_date:  string
+  email: string
+  pricing: string
+  amount: string
+  payment_term: string
+  start_date: string
+  end_date: string
   leftDays: number
-  user_id:number
-  account_status: 'Active' |'Inactive'
+  user_id: number
+  account_status: 'Active' | 'Inactive'
 }
 
 type ResponseType = { data: Array<ICheckUserAccount> }

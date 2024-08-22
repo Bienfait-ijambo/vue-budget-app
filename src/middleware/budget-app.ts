@@ -9,7 +9,7 @@ import {
 
 export function useBudgetAppMiddleware() {
   const userData = getUserData()
-//   const router = useRouter()
+  //   const router = useRouter()
 
   function showMenu(menuArr: IMenu[]) {
     if (userData?.user?.role === UserRole.ADMIN) {
@@ -31,8 +31,8 @@ export function useBudgetAppMiddleware() {
   ) {
     if (userData?.user?.role === UserRole.ADMIN) {
       next()
-    }else{
-      window.location.href='/notFound'
+    } else {
+      window.location.href = '/notFound'
     }
   }
 

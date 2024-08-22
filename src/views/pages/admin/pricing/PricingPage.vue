@@ -29,10 +29,7 @@ onMounted(async () => {
     </div>
     <br />
     <div class="row">
-      <PricingCard 
-      @makePayment="makePayment" 
-      :pricingData="serverData?.data"
-       />
+      <PricingCard @makePayment="makePayment" :pricingData="serverData?.data" />
     </div>
   </div>
 </template>

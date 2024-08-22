@@ -12,11 +12,11 @@ import type { userAccountStatusType } from '@/helper/auth'
 
 defineProps<{
   loading: boolean
-  userAccountStatus:userAccountStatusType
+  userAccountStatus: userAccountStatusType
 }>()
 const rules = {
   name: { required }, // Matches state.firstName
-  amount: { required, decimal },
+  amount: { required, decimal }
   // userId: { required }
 }
 const incomeOrExpense = useIncomOrExpenseStore()
@@ -28,7 +28,6 @@ function changeCheckboxStatus() {
 }
 
 const v$ = useVuelidate(rules, incomeOrExpense.input)
-
 
 const emit = defineEmits<{
   (e: 'submitForm', input: IFormCreateIncomeOrExpense, expenseOrIncome: DataType): Promise<void>
@@ -48,7 +47,7 @@ async function validate() {
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
-           <b> Create an Expense or Income</b>
+            <b> Create an Expense or Income</b>
           </div>
           <div class="card-body">
             <!-- start card body  -->
@@ -82,18 +81,16 @@ async function validate() {
               <div class="row">
                 <div class="col-md-8"></div>
                 <div class="col-md-4">
-                 <div v-if="userAccountStatus==='Active'">
-                  <BaseBtn
-                    :class="incomeOrExpense.edit ? 'btn btn-warning' : 'btn btn-primary'"
-                    :loading="loading"
-                    :label="incomeOrExpense.edit ? 'Update' : 'Create'"
-                  />
-                 </div>
-                 <div v-else>
-                  Please make a subscription : <RouterLink to="/pricings">Pricings</RouterLink>
-                 </div>
-                   
-                 
+                  <div v-if="userAccountStatus === 'Active'">
+                    <BaseBtn
+                      :class="incomeOrExpense.edit ? 'btn btn-warning' : 'btn btn-primary'"
+                      :loading="loading"
+                      :label="incomeOrExpense.edit ? 'Update' : 'Create'"
+                    />
+                  </div>
+                  <div v-else>
+                    Please make a subscription : <RouterLink to="/pricings">Pricings</RouterLink>
+                  </div>
                 </div>
               </div>
             </form>

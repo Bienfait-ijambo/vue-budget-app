@@ -1,22 +1,22 @@
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onMounted } from 'vue'
 
-import {useGetPayments} from './actions/getPayments'
+import { useGetPayments } from './actions/getPayments'
 import PaymentTable from './components/PaymentTable.vue'
-const {serverData,getPayments}=useGetPayments()
+const { serverData, getPayments } = useGetPayments()
 
-onMounted(async()=>{
-await getPayments()
+onMounted(async () => {
+  await getPayments()
 })
 </script>
 
 <template>
-    <div class="container">
-      <h4>My payments</h4>
-      <div class="row">
-        <div class="col-md-12">
-            <paymentTable :payments="serverData?.data"/>
-        </div>
+  <div class="container">
+    <h4>My payments</h4>
+    <div class="row">
+      <div class="col-md-12">
+        <paymentTable :payments="serverData?.data" />
       </div>
     </div>
-  </template>
+  </div>
+</template>

@@ -5,10 +5,6 @@ import { APP } from '@/http/App'
 function loginOrSignUpUser() {
   window.location.href = APP.baseURL + '/auth/redirect'
 }
-
-
-
-
 </script>
 <template>
   <div class="row">
@@ -24,7 +20,7 @@ function loginOrSignUpUser() {
         <div class="card">
           <div class="card-body">
             <br />
-         
+
             <LoginButton @loginOrSignUpUser="loginOrSignUpUser">
               <template #image>
                 <img src="/src/assets/google.svg" height="20" width="20" />

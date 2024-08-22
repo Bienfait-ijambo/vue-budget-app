@@ -4,7 +4,7 @@ export function confirmDelation(message?: string) {
   return new Promise((resolve, reject) => {
     Swal.fire({
       title: 'Are you sure?',
-      text: typeof message === undefined ? 'do you want to delete this ' :message,
+      text: typeof message === undefined ? 'do you want to delete this ' : message,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

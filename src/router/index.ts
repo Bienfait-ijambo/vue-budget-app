@@ -1,8 +1,13 @@
 import { useBudgetAppMiddleware } from '@/middleware/budget-app'
-import { createRouter, createWebHistory, type NavigationGuardNext, type RouteLocationNormalized, type RouteLocationNormalizedLoaded } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  type NavigationGuardNext,
+  type RouteLocationNormalized,
+  type RouteLocationNormalizedLoaded
+} from 'vue-router'
 
-
-const {showCustomer}=useBudgetAppMiddleware()
+const { showCustomer } = useBudgetAppMiddleware()
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,8 +31,7 @@ const router = createRouter({
           path: '/user_blocked',
           name: 'user_blocked',
           component: () => import('../views/pages/auth/UserBlockedPage.vue')
-        },
-       
+        }
       ]
     },
     {
@@ -61,7 +65,7 @@ const router = createRouter({
           name: 'payment_succeed',
           component: () => import('../views/pages/admin/pricing/PaymentSucceed.vue')
         },
-     
+
         {
           path: '/payments',
           name: 'payments',
@@ -71,24 +75,15 @@ const router = createRouter({
           path: '/customers',
           name: 'customers',
           component: () => import('../views/pages/customer/CustomerPage.vue'),
-        beforeEnter:showCustomer
-         
+          beforeEnter: showCustomer
         },
         {
           path: '/notfound',
           name: 'notfound',
-          component: () => import('../views/pages/404/NotFound.vue'),
-     
-         
-        },
-
-
-     
-       
-        
+          component: () => import('../views/pages/404/NotFound.vue')
+        }
       ]
-    },
-   
+    }
   ]
 })
 

@@ -5,9 +5,8 @@ defineProps<{
   pricingData: Array<IPricings>
 }>()
 
-
-const emit=defineEmits<{
-  (e:'makePayment',pricing:IPricings):void
+const emit = defineEmits<{
+  (e: 'makePayment', pricing: IPricings): void
 }>()
 </script>
 <template>
@@ -27,7 +26,13 @@ const emit=defineEmits<{
         >
           <li>{{ priceFeature.name }}</li>
         </ul>
-        <button @click="emit('makePayment',pricing)"  type="button" class="btn btn-lg btn-block btn-outline-primary">Get Started</button>
+        <button
+          @click="emit('makePayment', pricing)"
+          type="button"
+          class="btn btn-lg btn-block btn-outline-primary"
+        >
+          Get Started
+        </button>
       </div>
     </div>
   </div>

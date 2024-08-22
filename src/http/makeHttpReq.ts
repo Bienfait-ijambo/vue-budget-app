@@ -4,10 +4,10 @@ import { APP } from './App'
 type HttpVerbType = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 /**
- * 
- * @param message 
+ *
+ * @param message
  * @param timeout 10 seconds is better [you can change]
- * @returns 
+ * @returns
  */
 export function httpTimeOut(message: string, timeout = 6000) {
   return new Promise<void>((resolve, reject) => {
@@ -36,7 +36,7 @@ export function makeHttpReq<TInput, TResponse>(
         }),
         httpTimeOut('Server Error')
       ])
- 
+
       const data: TResponse = await (res as Response).json()
 
       if (!(res as Response).ok) {

@@ -22,10 +22,11 @@ const emit = defineEmits<{
         <a href="#">
           {{ userData?.user?.email }}
         </a>
-        <br/>
+        <br />
         {{ userData?.user?.role }}
-        <br/>
-        LeftDays : {{ userData?.userAccount?.leftDays }} - <span class="badge bg-success"> {{ userData?.userAccount?.account_status }}</span>
+        <br />
+        LeftDays : {{ userData?.userAccount?.leftDays }} -
+        <span class="badge bg-success"> {{ userData?.userAccount?.account_status }}</span>
       </div>
       <br />
       <h6
@@ -35,8 +36,8 @@ const emit = defineEmits<{
         <a class="link-secondary" href="#" aria-label="Add a new report">
           <span data-feather="plus-circle"></span>
         </a>
-      </h6> 
-      <ul class="nav flex-column"  tested-ul="links">
+      </h6>
+      <ul class="nav flex-column" tested-ul="links">
         <li class="nav-item" v-for="nav in navigation" :key="nav.name">
           <slot name="navigation" v-bind="{ nav }"></slot>
         </li>
