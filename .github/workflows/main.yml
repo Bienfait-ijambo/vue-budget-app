@@ -10,5 +10,5 @@ jobs:
   deploy:
     name : run test
     needs: tests
-    uses : ./.github/workflows/ci-render.yml
+    uses : ./.github/workflows/cd-render.yml
   
