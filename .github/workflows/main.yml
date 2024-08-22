@@ -1,0 +1,14 @@
+name: Main workflow
+
+on: [push]
+
+jobs:
+  tests:
+    name:  run tests 
+    uses : ./.github/workflows/ci-test.yml
+
+  deploy:
+    name : run test
+    needs: tests
+    uses : ./.github/workflows/ci-render.yml
+  
