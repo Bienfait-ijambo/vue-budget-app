@@ -38,7 +38,7 @@ async function getAccessTokenAndRefreshToken() {
     const input: OauthTokenInputType = {
       grant_type: 'authorization_code',
       client_id: '9ca9a351-601f-41da-90d8-d2c86f80dc6c',
-      redirect_uri: 'http://localhost:5173/callback',
+      redirect_uri: 'https://vue-budget-app.onrender.com/callback',
       code_verifier: codeVerifier,
       code: userData?.authorizationCode as string
     }
