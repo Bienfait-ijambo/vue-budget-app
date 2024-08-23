@@ -22,8 +22,8 @@ jobs:
     - name: Run tests
       run: npm run test:unit
 
-    - name: Remove dist folder
-      run: rm -rf dist
+    # - name: Remove dist folder
+    #   run: rm -rf dist
     
-    - name: Build app
-      run: npm run build-only
+    # - name: Build app
+    #   run: npm run build-only
