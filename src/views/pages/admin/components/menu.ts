@@ -10,7 +10,7 @@ export const Menu: Array<IMenu> = [
     icon: 'bi bi-wrench-adjustable'
   },
   {
-    name: 'Income & Expenses',
+    name: 'Income & Expenss',
     link: '/create_income_or_expenses',
     icon: 'bi bi-piggy-bank'
   },
